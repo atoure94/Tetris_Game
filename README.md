@@ -8,3 +8,5 @@ This is a simple implementation of the classic Tetris game using React.js. It in
 - Z: Rotate the Tetris block counterclockwise
 - X: Rotate the Tetris block clockwise (same as Up Arrow)
 
+# Test Demo
+https://seevt.github.io/tetris-in-react/
