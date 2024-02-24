@@ -121,6 +121,7 @@ function Tetris() {
       <audio
         style={{
           width: 'min(100% - 2rem, 30ch)',
+          visibility: 'hidden',
           position: 'fixed',
           bottom: 20,
           insetInlineStart: '50%',
