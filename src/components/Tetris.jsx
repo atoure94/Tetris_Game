@@ -2,6 +2,7 @@ import Stage from './Stage';
 import Display from './Display';
 import StartButton from './StartButton';
 import { useEffect, useState } from 'react';
+import song from '../assets/song/tetris_song.mp3';
 
 //styled components
 import styled, { css } from 'styled-components';
@@ -15,6 +16,7 @@ import { useGameStatus } from '../hooks/useGameStatus';
 
 //utils
 import { createStage, checkCollision } from '../utils/gameHelpers';
+import { useRef } from 'react';
 
 function Tetris() {
   console.log('re-render');
@@ -27,9 +29,7 @@ function Tetris() {
   const [score, setScore, rows, setRows, level, setLevel] =
     useGameStatus(rowsCleared);
 
-  useEffect(() => {
-    console.log(stage);
-  }, []);
+  const audio = useRef(null);
 
   function movePlayer(direction) {
     if (!checkCollision(player, stage, { x: direction, y: 0 })) {
@@ -46,6 +46,10 @@ function Tetris() {
     setScore(0);
     setRows(0);
     setLevel(0);
+
+    audio.current.volume = 0.1;
+    audio.current.play();
+    audio.current.loop = true;
   };
 
   function drop() {
@@ -60,7 +64,7 @@ function Tetris() {
     } else {
       // Gameover
       if (player.position.y < 1) {
-        console.log('Gameover');
+        // console.log('Gameover');
         setGameover(true);
         setDroptime(null);
       }
@@ -71,7 +75,7 @@ function Tetris() {
   const keyUp = ({ keyCode }) => {
     if (!gameover) {
       if (keyCode === 40) {
-        console.log('interval on');
+        // console.log('interval on');
         setDroptime(1000 / (level + 1) + 200);
       }
     }
@@ -79,7 +83,7 @@ function Tetris() {
 
   function dropPlayer() {
     setDroptime(null);
-    console.log('interval off');
+    // console.log('interval off');
     drop();
   }
 
@@ -103,6 +107,10 @@ function Tetris() {
     drop();
   }, droptime);
 
+  useEffect(() => {
+    console.log(audio.current);
+  }, []);
+
   return (
     <TetrisWrapper
       role="button"
@@ -110,8 +118,22 @@ function Tetris() {
       onKeyUp={keyUp}
       onKeyDown={(e) => move(e)}
     >
+      <audio
+        style={{
+          width: 'min(100% - 2rem, 30ch)',
+          position: 'fixed',
+          bottom: 20,
+          insetInlineStart: '50%',
+          transform: 'translateX(-50%)',
+        }}
+        ref={audio}
+        controls
+        controlsList="nodownload"
+        src={song}
+      />
       <div className={`second-wrapper`}>
         <Stage stage={stage} />
+
         <aside>
           {/* ternary */}
           {gameover ? (
@@ -140,6 +162,7 @@ const TetrisWrapper = styled.div`
   background: url(${bgImg});
   background-size: cover;
   overflow: hidden;
+  position: relative;
 
   & .second-wrapper {
     display: flex;
