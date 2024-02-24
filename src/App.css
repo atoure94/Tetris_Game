@@ -1,5 +1,10 @@
-* {
+@font-face {
   font-family: 'LCD Solid';
+  src: url('./assets/font/LcdSolid-VPzB.ttf');
+}
+
+* {
+  font-family: 'LCD Solid', sans-serif;
   color: aliceblue;
 }
 
