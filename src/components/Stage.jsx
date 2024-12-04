@@ -1,7 +1,7 @@
 import Cell from './Cell';
 import PropTypes from 'prop-types';
 
-//styled-components
+
 import styled from 'styled-components';
 
 function Stage({ stage }) {

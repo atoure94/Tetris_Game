@@ -1,5 +1,5 @@
 import { TETROMINOS } from '../utils/tetrominos';
-// import PropTypes from 'prop-types';
+
 
 import styled from 'styled-components';
 
@@ -9,7 +9,7 @@ function Cell({ type }) {
   return (
     <StyledCell
       type={type}
-      // eslint-disable-next-line dot-notation
+
       color={TETROMINOS[type].color}
     ></StyledCell>
   );
@@ -25,8 +25,5 @@ const StyledCell = styled.div`
   border-left-color: rgba(${(props) => props.color}, 0.3);
 `;
 
-// Cell.propTypes = {
-//   type: PropTypes.object.isRequired,
-// };
 
 export default React.memo(Cell);

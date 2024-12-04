@@ -8,9 +8,9 @@ export const useGameStatus = (rowsCleared) => {
   const linePoints = [40, 100, 300, 1200];
 
   const calcScore = useCallback(() => {
-    // if we have score
+
     if (rowsCleared > 0) {
-      // calculate score like og tetris
+
       setScore((prev) => prev + linePoints[rowsCleared - 1] * (level + 1));
       setRows((prev) => prev + rowsCleared);
     }

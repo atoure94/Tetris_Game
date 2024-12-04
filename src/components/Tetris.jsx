@@ -4,17 +4,17 @@ import StartButton from './StartButton';
 import { useEffect, useState } from 'react';
 import song from '../assets/song/tetris_song.mp3';
 
-//styled components
+
 import styled, { css } from 'styled-components';
 import bgImg from '../assets/bg.png';
 
-// custom hooks
+
 import { usePlayer } from '../hooks/usePlayer';
 import { useStage } from '../hooks/useStage';
 import { useInterval } from '../hooks/useInterval';
 import { useGameStatus } from '../hooks/useGameStatus';
 
-//utils
+
 import { createStage, checkCollision } from '../utils/gameHelpers';
 import { useRef } from 'react';
 
@@ -53,18 +53,18 @@ function Tetris() {
   };
 
   function drop() {
-    // increase lvl when player clears 10 rows
+
     if (rows > (level + 1) * 10) {
       setLevel((prev) => prev + 1);
-      // also increase speed
+
       setDroptime(1000 / (level + 1) + 200);
     }
     if (!checkCollision(player, stage, { x: 0, y: 1 })) {
       updatePlayerPosition({ x: 0, y: 1, collided: false });
     } else {
-      // Gameover
+
       if (player.position.y < 1) {
-        // console.log('Gameover');
+
         setGameover(true);
         setDroptime(null);
       }
@@ -75,7 +75,7 @@ function Tetris() {
   const keyUp = ({ keyCode }) => {
     if (!gameover) {
       if (keyCode === 40) {
-        // console.log('interval on');
+
         setDroptime(1000 / (level + 1) + 200);
       }
     }
@@ -83,7 +83,7 @@ function Tetris() {
 
   function dropPlayer() {
     setDroptime(null);
-    // console.log('interval off');
+
     drop();
   }
 

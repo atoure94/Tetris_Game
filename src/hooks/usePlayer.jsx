@@ -28,19 +28,19 @@ export const usePlayer = () => {
   }
 
   const rotate = (matrix, direction) => {
-    // turn rows into colums (transpose)
+
 
     const rotatedTetro = matrix.map((_, index) =>
       matrix.map((col) => col[index]),
     );
 
-    // reverse each row to get a rotated matrix
+
     if (direction > 0) return rotatedTetro.map((row) => row.reverse());
     return rotatedTetro.reverse();
   };
 
   const playerRotate = (stage, direction) => {
-    // cant mutate state, deep clone:
+
     const clonedPlayer = JSON.parse(JSON.stringify(player));
     clonedPlayer.tetromino = rotate(clonedPlayer.tetromino, direction);
 
